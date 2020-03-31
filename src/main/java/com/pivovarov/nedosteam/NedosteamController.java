@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class NedosteamController {
 
-    @GetMapping("/profile/{login}")
-    public String profile(@RequestParam("login")String login, Model model) {
+    @GetMapping("/profile")
+    public String profile(@RequestParam()String login, Model model) {
         model.addAttribute("login", login);
         return "profile";
     }
