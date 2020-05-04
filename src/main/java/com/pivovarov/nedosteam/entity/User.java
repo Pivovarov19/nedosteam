@@ -1,4 +1,4 @@
-package com.pivovarov.nedosteam;
+package com.pivovarov.nedosteam.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,4 +46,8 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String getEmail() {return email;}
+
+    public void setEmail(String email) {this.email = email;}
 }

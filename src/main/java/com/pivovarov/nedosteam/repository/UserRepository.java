@@ -1,5 +1,6 @@
-package com.pivovarov.nedosteam;
+package com.pivovarov.nedosteam.repository;
 
+import com.pivovarov.nedosteam.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
