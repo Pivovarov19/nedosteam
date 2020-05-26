@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>UserInfo</title>
+</head>
+<body>
+<h1 th:text="'GameId: ' + ${game.getId()}"/>
+<h1 th:text="'Name: ' + ${game.getName()} + '.'"/>
+<h1>Description:</h1>
+<p th:text="${game.getDescription()}"/>
+<h1>Developer:  <a th:href="@{'/profile/' + ${game.devId}}" th:text="${game.devNickname}"></a></h1>
+<h1 th:text="'Price: ' + ${game.getPrice()}"/>
+</body>
+</html>

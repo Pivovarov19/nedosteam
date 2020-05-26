@@ -1,26 +1,27 @@
 package com.pivovarov.nedosteam.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Game {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     private String name;
     private String description;
-    private String devEmail;
+    private String devNickname;
+    private long devId;
     private double price;
 
     public Game() {
     }
 
-    public Game(String name, String description, String devEmail, double price) {
+    public Game(String name, String description, String devNickname, double price, int devId) {
         this.name = name;
         this.description = description;
-        this.devEmail = devEmail;
+        this.devNickname = devNickname;
         this.price = price;
+        this.devId = devId;
     }
 
     public long getId() {return id;}
@@ -31,7 +32,7 @@ public class Game {
 
     public String getDescription() {return description;}
 
-    public String getDevEmail() {return devEmail;}
+    public String getDevNickname() {return devNickname;}
 
     public double getPrice() {return price;}
 
@@ -39,7 +40,11 @@ public class Game {
 
     public void setDescription(String description) {this.description = description;}
 
-    public void setDevEmail(String devEmail) {this.devEmail = devEmail;}
+    public void setDevNickname(String devEmail) {this.devNickname = devEmail;}
 
     public void setPrice(double price) {this.price = price;}
+
+    public long getDevId() {return devId;}
+
+    public void setDevId(long devId) {this.devId = devId;}
 }

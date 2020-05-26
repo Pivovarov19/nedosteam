@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+
+</head>
+<body>
+<h2>List of games</h2>
+
+<table>
+
+    <tr>
+        <th>Name</th>
+        <th>Developer</th>
+        <th>Price</th>
+    </tr>
+
+    <tr th:each="game : ${allGames}">
+        <td>
+            <a th:href="@{'/game/' + ${game.id}}" th:text="${game.name}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/profile/' + ${game.devId}}" th:text="${game.devNickname}"></a>
+        </td>
+        <td th:text="${game.price}"></td>
+    </tr>
+
+</table>
+</body>
+</html>

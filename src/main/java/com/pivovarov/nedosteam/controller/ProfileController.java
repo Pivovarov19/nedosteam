@@ -1,5 +1,6 @@
 package com.pivovarov.nedosteam.controller;
 
+import com.pivovarov.nedosteam.repository.UserRepository;
 import com.pivovarov.nedosteam.service.ProfileService;
 import com.pivovarov.nedosteam.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,30 +9,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class NedosteamController {
+@RequestMapping("profile")
+public class ProfileController {
     @Autowired
     private ProfileService profileService;
+    @Autowired
+    private UserRepository userRepository;
 
-    @GetMapping("/profile/{id}")
+    public ProfileController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
+
+    @GetMapping("all")
+    public String showAllUsers(Model model){
+        model.addAttribute("allUsers", userRepository.findAll());
+        return "userMenu";
+    }
+
+    @GetMapping("{id}")
     public String profile(@PathVariable("id") String id, Model model) throws Exception {
         User user = profileService.getUser(Integer.parseInt(id));
         model.addAttribute("user", user);
         return "profile";
     }
 
-    @PostMapping("/profile")
-    public String postProfile(@RequestBody User user, Model model) {
-        User savedUser = profileService.saveUser(user);
-        model.addAttribute("user", user);
-        return "profile";
-    }
-
-    @GetMapping("/profile/registration")
-    public String registrationProfile() {
-        return "registration";
-    }
-
-    @PutMapping("/profile/{id}")
+    @PutMapping("{id}")
     public String putProfile(@RequestBody User user, @PathVariable("id") long id, Model model) {
         User currentUser = null;
         try {
@@ -53,5 +55,20 @@ public class NedosteamController {
         User savedUser = profileService.saveUser(currentUser);
         model.addAttribute("user", currentUser);
         return "profile";
+    }
+
+    @GetMapping("login")
+    public String login() {return "login";}
+
+    @GetMapping("registration")
+    public String registrationProfile(Model model) {
+        model.addAttribute("user", new User());
+        return "userRegistration";
+    }
+
+    @PostMapping("registration")
+    public String postGarage(@ModelAttribute User user) {
+        User savedUser = profileService.saveUser(user);
+        return "redirect:login";
     }
 }
